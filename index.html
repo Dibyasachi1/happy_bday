@@ -483,7 +483,7 @@
             </div>
             
             <h1 class="name-title">Smurti Ranjan Ojha</h1>
-            <p class="subtitle">Happy Birthday Sakhe!</p>
+            <p class="subtitle">Happy Birthday</p>
         </section>
 
         <!-- Cake Section -->
@@ -537,6 +537,11 @@
     </div>
 
     <script>
+        // Initialize Birthday Music - AUTOPLAY ON REVEAL
+        let birthdayAudio = new Audio('happy-birthday.mp3'); // Replace with your Happy Birthday MP3 file or URL
+        birthdayAudio.volume = 0.4;
+        birthdayAudio.loop = false; // Set to true if you want it to repeat
+
         // Create Stars
         function createStars() {
             const starsContainer = document.getElementById('stars');
@@ -630,7 +635,7 @@
         }
         animateConfetti();
 
-        // Open Surprise
+        // Open Surprise - NOW WITH AUTO-PLAYING MUSIC!
         function openSurprise() {
             const reveal = document.getElementById('reveal-screen');
             const main = document.getElementById('main-content');
@@ -643,6 +648,17 @@
                 main.classList.add('visible');
                 createConfetti(window.innerWidth/2, window.innerHeight/3, 300);
                 createBalloons();
+                
+                // AUTO-PLAY BIRTHDAY MUSIC
+                birthdayAudio.currentTime = 0; // Start from beginning
+                birthdayAudio.play().catch(error => {
+                    console.log('Autoplay prevented:', error);
+                    // Fallback: Show notification that music is ready
+                    setTimeout(() => {
+                        alert('🎵 Tap "Play Music" button to hear Happy Birthday!');
+                    }, 1000);
+                });
+                
             }, 800);
         }
 
@@ -653,10 +669,10 @@
         }
 
         function playMusic() {
-            const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
-            audio.volume = 0.4;
-            audio.play().catch(() => {
-                alert('Tap anywhere on the page first to enable audio, then try again!');
+            // Reset and play the birthday song
+            birthdayAudio.currentTime = 0;
+            birthdayAudio.play().catch(() => {
+                alert('🎵 Music is ready! Try clicking again.');
             });
         }
 
